@@ -35,6 +35,13 @@ int main(int argc, char *argv[])
     {
         // read 512 bytes
         fread(buffer, sizeof(buffer), 1, file);
+
+        // break from loop if reached end of file
+        if (feof(file))
+        {
+            break;
+        }
+
         // check if beginning of jpeg file
         if (jpeg_begins(sizeof(buffer), buffer))
         {
@@ -55,12 +62,6 @@ int main(int argc, char *argv[])
         if (outfile != NULL)
         {
             fwrite(buffer, sizeof(buffer), 1, outfile);
-        }
-
-        // break from loop if reached end of file
-        if (feof(file))
-        {
-            break;
         }
 
     }
